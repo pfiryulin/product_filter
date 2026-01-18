@@ -6,6 +6,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 
 class ProductController extends Controller
@@ -15,7 +16,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(Request $request) : AnonymousResourceCollection
+    public function index(Request $request) : AnonymousResourceCollection|Response
     {
         $products = Product::query();
 
@@ -49,10 +50,16 @@ class ProductController extends Controller
         }
 
         $products = $products->with('categories');
-        $products = $products->paginate($request->has('pagination') ? $request->pagination : 10);
+        $products = $products->paginate($request->has('per_page') ? $request->per_page : 10);
+
+        if($products->isEmpty())
+        {
+            return response([
+                'message' => 'Products not found',
+            ], 404);
+        }
 
         return ProductResource::collection($products);
-        return $products;
     }
 
     /**
