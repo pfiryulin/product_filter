@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property integer $category_id
  * @property boolean $in_stock
  * @property float $rating
+ * @property \Cassandra\Collection<Category> $categories
  *
  */
 class Product extends Model
@@ -33,7 +34,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category(): BelongsTo
+    public function categories(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
