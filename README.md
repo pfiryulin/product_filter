@@ -6,7 +6,7 @@ Rest API для получения списка товаров с фильтра
 
 ## Base URL
 
-{{ host }}/api/product
+[host]/api/product
 
 ---
 
@@ -48,7 +48,7 @@ Rest API для получения списка товаров с фильтра
 | Параметр   | Тип     | По умолчанию |
 |------------|---------|--------------|
 | `page`     | integer | `1`          |
-| `per_page` | integer | `20`         |
+| `per_page` | integer | `10`         |
 
 ___
 
@@ -71,10 +71,10 @@ ___
         }
     ],
     "links": {
-        "first": "https://products_filter.test/api/products?page=1",
-        "last": "https://products_filter.test/api/products?page=10",
+        "first": "[host]/api/products?page=1",
+        "last": "[host]/api/products?page=10",
         "prev": null,
-        "next": "https://products_filter.test/api/products?page=2"
+        "next": "[host]/api/products?page=2"
     },
     "meta": {
         "current_page": 1,
